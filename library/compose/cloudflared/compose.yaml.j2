@@ -9,7 +9,7 @@ services:
       - no-new-privileges:true
 
     volumes:
-      - ./config.yml:/etc/cloudflared/config.yml:ro
+      - ./config.yaml:/etc/cloudflared/config.yml:ro
       - {{ credentials }}:{{ volume_credentials_mount }}:ro
 
     networks:
