@@ -1,0 +1,9 @@
+tunnel: {{ tunnel_uuid }}
+credentials-file: {{ volume_credentials_mount }}
+
+ingress:
+#  - hostname: ha-2.hostname.tech
+#    service: http://traefik:80
+#  - hostname: hdb-2.hostname.tech
+#   service: http://traefik:8080
+  - service: http_status:404
