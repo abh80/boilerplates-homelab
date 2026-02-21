@@ -3,7 +3,8 @@ services:
     image: docker.io/twingate/connector:{{ twingate_version }}
     restart: {{ restart_policy }}
     container_name: {{ container_name }}
-
+    env_file:
+      - .env
     hostname: {{ container_hostname }}
     {#
       Environment variables for Twingate Connector configuration
