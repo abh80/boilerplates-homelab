@@ -1,0 +1,20 @@
+---
+services:
+  {{ service_name }}:
+    image: docker.io/cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: tunnel --config /etc/cloudflared/config.yml run
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+    volumes:
+      - ./config.yml:/etc/cloudflared/config.yml:ro
+      - {{ credentials }}:{{ volume_credentials_mount }}:ro
+
+    networks:
+      - proxy
+
+networks:
+  {{ network_name }}:
+    external: true
