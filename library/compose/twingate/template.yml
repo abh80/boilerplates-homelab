@@ -1,0 +1,87 @@
+kind: compose
+metadata:
+  icon:
+    provider: selfh
+    id: twingate
+  name: Twingate_Connector
+  description:
+    "The Twingate Connector is a lightweight software component that establishes
+    secure connections between your private network and the Twingate service. It acts
+    as a bridge, allowing authorized users to access internal resources without exposing
+    them directly to the internet. The Connector uses strong encryption and authentication
+    mechanisms to ensure that all data transmitted between users and resources remains
+    confidential and secure.
+
+
+    Project: https://www.twingate.com/
+
+    Documentation: https://docs.twingate.com/docs/architecture/connectors
+
+    GitHub: https://github.com/twingate/twingate-connector
+
+    "
+  version: 1.80.0
+  author: abh80
+  date: "2026-02-21"
+  tags:
+    - networking
+    - tunnel
+schema: "1.2"
+spec:
+  general:
+    vars:
+      service_name:
+        default: twingate
+      container_timezone:
+        type: str
+      restart_policy:
+        type: enum
+        options:
+          - unless-stopped
+          - always
+          - on-failure
+          - "no"
+        default: unless-stopped
+        required: true
+      twingate_version:
+        type: str
+        description: Twingate Connector version
+        default: 1.79.0
+      container_hostname:
+        default: twingate_connector
+      container_name:
+        default: twingate_connector
+
+  twingate:
+    title: Twingate Configuration
+    required: true
+    vars:
+      twingate_network:
+        type: str
+        description: Your Twingate network name
+        prompt: Enter your Twingate network name
+      twingate_log_level:
+        type: int
+        description: Log level (1=ERROR, 2=WARN, 3=INFO, 4=DEBUG)
+        default: 1
+      twingate_dns:
+        type: str
+        description: Local DNS server IP (optional, leave empty to use default)
+        default: ""
+  network:
+    vars:
+      network_name:
+        type: str
+        required: true
+        default: proxy
+        description: "Name of the network to connect to."
+  secrets:
+    vars:
+      twingate_access_token:
+        type: str
+        description: Twingate access token
+        required: true
+      twingate_refresh_token:
+        type: str
+        description: Twingate refresh token
+        required: true
