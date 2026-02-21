@@ -30,6 +30,9 @@ services:
     sysctls:
       net.ipv4.ping_group_range: "0 2147483647"
 
+    networks:
+      - {{ network_name }}
+
 networks:
     {{ network_name }}:
         external: true
